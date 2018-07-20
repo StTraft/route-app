@@ -2,7 +2,6 @@ require('dotenv').config()
 import redis from 'redis'
 import uuid from 'uuid/v4'
 import { promisify } from 'util'
-import { caughtErrorInPromise } from './Errors.js'
 /**
  *   init redis client,
  *   should take options from env
@@ -19,8 +18,6 @@ client.on('error', err => {
   console.log('ERROR: something went wrong on redis server:', err)
   throw new Error('REDIS ERROR: something went wrong on redis server')
 })
-
-const parseTokenToKey = token => `${REDIS_NAMESPACE}/${token}`
 
 export function setData(data = {}, token) {
   let _token = token || uuid()
@@ -42,8 +39,14 @@ export async function getData(token) {
   return data
 }
 
-// clear records after consume
+const parseTokenToKey = token => `${REDIS_NAMESPACE}/${token}`
+
 const returnDataAndCleanRecords = key => data => (client.del(key), data)
+
+const caughtErrorInPromise = TYPE => err => {
+  console.log(err) // to system log
+  return new Promise((_, rej) => rej(new Error(`${TYPE}: ${err.message}`))) 
+}
 
 export default {
   setData,
