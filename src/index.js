@@ -1,14 +1,20 @@
+require('dotenv').config()
 import express from 'express'
 import bodyParser from 'body-parser'
 import queryGoogle from './queryGoogle.js'
+import fetchResult from './fetchResult.js'
+
+const PORT = parseInt(process.env.PORT)
 
 const app = express()
 
-app.get('/', queryGoogle)
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
-app.post('token/:token', (req, res) => {
-  console.log('token:', req.params.token)
-  res.send({status: 'success'})
-})
+app.post('/route', queryGoogle)
 
-app.listen(3000, () => console.log('Listening on port 3000!'))
+app.get('/route/:token', fetchResult)
+
+app.listen( PORT , () => console.log(`Listening on port ${PORT}!`))
+
+export default app // test
