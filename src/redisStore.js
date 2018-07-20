@@ -28,7 +28,7 @@ export function setData(data = {}, token) {
 }
 
 export async function getData(token) {
-  const returnDataAndRemoveKey = data => (client.del(key), data)
+  
   const key = parseTokenToKey(token)
 
   let data = await getAsync(key)
@@ -39,6 +39,8 @@ export async function getData(token) {
   if (data === null) throw new Error(`RECORD ERROR: No pending query is associated with token ${token} or has been consumed.`)
   return data
 }
+
+const returnDataAndRemoveKey = data => (client.del(key), data)
 
 export default {
   setData,
