@@ -17,7 +17,7 @@ export default function queryGoogle(req, res) {
 
     let token = redisStore.setData(initStoreData)
 
-    let data = request.get( callGoogleApiFor(initStoreData.path) )
+    request.get( callGoogleApiFor(initStoreData.path) )
       .then( JSON.parse )
       .then( getShortestRoute )
       .then( pushRecordToRedisStore(token, initStoreData) )

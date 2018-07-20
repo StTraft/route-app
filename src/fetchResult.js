@@ -10,7 +10,9 @@ export default async function fetchResult(req, res) {
 
     let data = await redisStore.getData(token)
 
-    res.send(data)
+    let { status } = data
+
+    res.send( status === 'in progress' ? { status } : data)
     return data
   }
   catch(err) {
