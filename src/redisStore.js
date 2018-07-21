@@ -7,16 +7,22 @@ import { promisify } from 'util'
  *   should take options from env
  *
  */
-const REDIS_NAMESPACE = process.env.REDIS_NAMESPACE
+const REDIS_PORT            = process.env.REDIS_PORT
+const REDIS_HOST            = process.env.REDIS_HOST
+const REDIS_NAMESPACE       = process.env.REDIS_NAMESPACE
 const REDIS_KEY_EXPIRE_TIME = parseInt( process.env.REDIS_KEY_EXPIRE_TIME )
-const client = redis.createClient({ttl: REDIS_KEY_EXPIRE_TIME})
+
+const client = redis.createClient({
+  host: REDIS_HOST,
+  port: REDIS_PORT,
+  ttl:  REDIS_KEY_EXPIRE_TIME
+})
 const getAsync = promisify(client.get).bind(client)
 
 client.on('connect', () => console.log('Redis is connected'))
 
 client.on('error', err => {
   console.log('ERROR: something went wrong on redis server:', err)
-  throw new Error('REDIS ERROR: something went wrong on redis server')
 })
 
 export function setData(data = {}, token) {
