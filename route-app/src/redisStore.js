@@ -1,4 +1,3 @@
-require('dotenv').config()
 import redis from 'redis'
 import uuid from 'uuid/v4'
 import { promisify } from 'util'

@@ -1,14 +1,21 @@
 version: '2'
 
 services:
+  nginx:
+    build: ./nginx
+    links:
+      - 'app:app'
+    ports:
+      - '80:80'
+    restart: always
   redis:
     image: redis
-    ports:
-      - '63790:6379'
-  web:
-    image: sttraft/route-app
+    restart: always
+  app:
+    build: ./route-app
     command: npm start
-    ports:
-      - '3000:3000'
     volumes:
       - .:/code
+    env_file:
+      - ./route-app/.env
+

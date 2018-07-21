@@ -1,4 +1,3 @@
-require('dotenv').config()
 import request from 'request-promise'
 import qs from 'query-string'
 import redisStore from './redisStore.js'
