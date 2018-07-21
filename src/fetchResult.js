@@ -15,10 +15,11 @@ export default async function fetchResult(req, res) {
     return data
   }
   catch(err) {
-    res.send({
+    let errReturn = {
       status: 'failure',
       error: err.message
-    })
-    return err
+    }
+    res.send(errReturn)
+    return errReturn
   }
 }
