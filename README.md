@@ -5,7 +5,7 @@ nodejs app for fetching total distance and total time, provided with sets of lat
 
 1. clone this project to a folder
 
-2. before run the docker commands, *CREATE THE `.env` FILE FIRST*. Please make sure EVERY KEY is filled as described in `route-app/env.example.txt`.
+2. before run the docker commands, **CREATE THE `.env` FILE AT THE SAME FOLDER AS `route-app/env.example.txt` FIRST**. Please make sure **EVERY KEY** is filled as described in `route-app/env.example.txt`.
 
 3. run `docker-compose up` command at the folder's root.
 
