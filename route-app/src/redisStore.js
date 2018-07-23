@@ -27,7 +27,7 @@ client.on('error', err => {
 export function setData(data = {}, token) {
   let _token = token || uuid()
   let key = parseTokenToKey(_token)
-  client.set(key, JSON.stringify(data), redis.print)
+  client.set(key, JSON.stringify(data))
   return _token
 }
 
@@ -49,7 +49,7 @@ const parseTokenToKey = token => `${REDIS_NAMESPACE}/${token}`
 const returnDataAndCleanRecords = key => data => (client.del(key), data)
 
 const caughtErrorInPromise = TYPE => err => {
-  console.log(err) // to system log
+  console.error(err) // to system log
   return new Promise((_, rej) => rej(new Error(`${TYPE}: ${err.message}`))) 
 }
 

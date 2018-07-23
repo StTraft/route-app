@@ -2,7 +2,6 @@ import redisStore from './redisStore.js'
 
 export default async function fetchResult(req, res) {
   res.setHeader('Content-Type', 'application/json')
-  console.log('endpoint reached')
   try {
     const {
       token
@@ -20,6 +19,7 @@ export default async function fetchResult(req, res) {
       status: 'failure',
       error: err.message
     }
+    console.error(err)
     res.send(errReturn)
     return errReturn
   }

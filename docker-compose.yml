@@ -3,6 +3,7 @@ version: '2'
 services:
   nginx:
     build: ./nginx
+    image: nginx-rp
     links:
       - 'app:app'
     ports:
@@ -13,6 +14,7 @@ services:
     restart: always
   app:
     build: ./route-app
+    image: app
     command: npm start
     volumes:
       - .:/code
