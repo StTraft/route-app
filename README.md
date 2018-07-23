@@ -9,6 +9,8 @@ nodejs app for fetching total distance and total time, provided with sets of lat
 
 3. run `docker-compose up` command at the folder's root.
 
+4. for logs, please use `docker logs` for each running containers.
+
 # Remark
 
 for scaling up with `docker-compose up --scale app=<Number>` command, please edit `nginx/nginx.conf` to make sure upstream server match the scale number. For example, if scale up to 4 app:
